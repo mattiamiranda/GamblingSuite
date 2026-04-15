@@ -1,4 +1,5 @@
 # Gambling Suite
+<img width="1712" height="624" alt="GamblingSuite" src="https://github.com/user-attachments/assets/e84f3788-13db-4040-8792-05dd8a2a162f" />
 
 Applicazione web per imparare a giocare a Blackjack e Poker (Texas Hold'em).
 
