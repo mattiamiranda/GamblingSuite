@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Tutorial.css';
 
 function Tutorial() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('blackjack');
+
+  const bt = t('blackjackTutorial');
+  const pt = t('pokerTutorial');
 
   return (
     <div className="tutorial-content">
@@ -11,61 +16,60 @@ function Tutorial() {
           onClick={() => setActiveTab('blackjack')}
           style={{ background: activeTab === 'blackjack' ? '#e94560' : '#0f3460' }}
         >
-          Blackjack
+          {t('blackjack')}
         </button>
         <button
           onClick={() => setActiveTab('poker')}
           style={{ background: activeTab === 'poker' ? '#e94560' : '#0f3460' }}
         >
-          Texas Hold'em
+          {t('poker')}
         </button>
       </div>
 
-      {activeTab === 'blackjack' && <BlackjackTutorial />}
-      {activeTab === 'poker' && <PokerTutorial />}
+      {activeTab === 'blackjack' && <BlackjackTutorial bt={bt} />}
+      {activeTab === 'poker' && <PokerTutorial pt={pt} />}
     </div>
   );
 }
 
-function BlackjackTutorial() {
+function BlackjackTutorial({ bt }) {
+  const lang = bt.objective.toLowerCase().includes('obiettivo') ? 'it' : 'en';
+  
   return (
     <div>
       <div className="tutorial-section">
-        <h2>Obiettivo del Gioco</h2>
-        <p>
-          L'obiettivo del Blackjack è battere il dealer ottenendo un punteggio il più vicino possibile a 21,
-          senza mai superarlo (sballare).
-        </p>
+        <h2>{bt.objective}</h2>
+        <p>{bt.objectiveText}</p>
       </div>
 
       <div className="tutorial-section">
-        <h2>Valore delle Carte</h2>
+        <h2>{bt.cardValues}</h2>
         <ul>
-          <li><strong> Carte numeriche (2-10):</strong> Valore nominale</li>
-          <li><strong> J, Q, K:</strong> Valore 10</li>
-          <li><strong> Asso:</strong> Valore 1 oppure 11 (a tua scelta)</li>
+          <li><strong>{lang === 'it' ? 'Carte numeriche (2-10):' : 'Numbered cards (2-10):'}</strong> {lang === 'it' ? 'Valore nominale' : 'Face value'}</li>
+          <li><strong>J, Q, K:</strong> 10</li>
+          <li><strong>{lang === 'it' ? 'Asso:' : 'Ace:'}</strong> {lang === 'it' ? '1 oppure 11' : '1 or 11'}</li>
         </ul>
       </div>
 
       <div className="tutorial-section">
-        <h2>Azioni Possibili</h2>
+        <h2>{bt.actions}</h2>
         <ul>
-          <li><strong>HIT (Chiamare):</strong> Chiedere un'altra carta</li>
-          <li><strong>STAND (Stare):</strong> Tenere il punteggio attuale</li>
-          <li><strong>DOUBLE (Raddoppiare):</strong> Raddoppiare la puntata e ricevere esattamente una carta</li>
-          <li><strong>SPLIT (Sdoppiare):</strong> Se hai due carte uguali, puoi dividerle in due mani separate</li>
+          <li><strong>HIT</strong>: {bt.hit}</li>
+          <li><strong>STAND</strong>: {bt.stand}</li>
+          <li><strong>DOUBLE</strong>: {bt.double}</li>
+          <li><strong>SPLIT</strong>: {bt.split}</li>
         </ul>
       </div>
 
       <div className="tutorial-section">
-        <h2>Strategia Base</h2>
-        <h3>Coppie</h3>
+        <h2>{bt.basicStrategy}</h2>
+        <h3>{bt.pairs}</h3>
         <table className="strategy-table">
           <thead>
             <tr>
-              <th>Coppia</th>
-              <th>Contro 2-7</th>
-              <th>Contro 8+</th>
+              <th>{lang === 'it' ? 'Coppia' : 'Pair'}</th>
+              <th>{bt.vs} 2-7</th>
+              <th>{bt.vs} 8+</th>
             </tr>
           </thead>
           <tbody>
@@ -78,13 +82,13 @@ function BlackjackTutorial() {
           </tbody>
         </table>
 
-        <h3 style={{ marginTop: '20px' }}>Mani Hard (senza Asso)</h3>
+        <h3 style={{ marginTop: '20px' }}>{bt.hardHands}</h3>
         <table className="strategy-table">
           <thead>
             <tr>
-              <th>Totale</th>
-              <th>Contro 2-6</th>
-              <th>Contro 7+</th>
+              <th>{bt.total}</th>
+              <th>{bt.vs} 2-6</th>
+              <th>{bt.vs} 7+</th>
             </tr>
           </thead>
           <tbody>
@@ -98,18 +102,18 @@ function BlackjackTutorial() {
           </tbody>
         </table>
 
-        <h3 style={{ marginTop: '20px' }}>Mani Soft (con Asso)</h3>
+        <h3 style={{ marginTop: '20px' }}>{bt.softHands}</h3>
         <table className="strategy-table">
           <thead>
             <tr>
-              <th>Mano</th>
-              <th>Azione</th>
+              <th>{bt.hand}</th>
+              <th>{bt.action}</th>
             </tr>
           </thead>
           <tbody>
             <tr><td>A,8 / A,9</td><td>STAND</td></tr>
             <tr><td>A,7</td><td>STAND (vs 2,7,8) / DOUBLE (vs 3-6)</td></tr>
-            <tr><td>A,2-A,6</td><td>DOUBLE (vs 5,6) / HIT (altri)</td></tr>
+            <tr><td>A,2-A,6</td><td>DOUBLE (vs 5,6) / HIT (others)</td></tr>
           </tbody>
         </table>
       </div>
@@ -117,60 +121,59 @@ function BlackjackTutorial() {
   );
 }
 
-function PokerTutorial() {
+function PokerTutorial({ pt }) {
+  const lang = pt.whatIs.toLowerCase().includes('cos') ? 'it' : 'en';
+
   return (
     <div>
       <div className="tutorial-section">
-        <h2>Cos'è il Texas Hold'em?</h2>
-        <p>
-          Il Texas Hold'em è la variante di poker più popolare al mondo. Ogni giocatore riceve 2 carte private
-          (hole cards) e 5 carte comuni vengono distribuite sul tavolo.
-        </p>
+        <h2>{pt.whatIs}</h2>
+        <p>{pt.whatIsText}</p>
       </div>
 
       <div className="tutorial-section">
-        <h2>Fasi del Gioco</h2>
+        <h2>{pt.phases}</h2>
         <ul>
-          <li><strong>Pre-flop:</strong> Prima delle carte comuni, puoi scegliere di rilanciare, vedere o passare</li>
-          <li><strong>Flop:</strong> 3 carte comuni sul tavolo</li>
-          <li><strong>Turn:</strong> 4a carta comune</li>
-          <li><strong>River:</strong> 5a e ultima carta comune</li>
+          <li><strong>Pre-flop</strong>: {pt.preflop}</li>
+          <li><strong>Flop</strong>: {pt.flop}</li>
+          <li><strong>Turn</strong>: {pt.turn}</li>
+          <li><strong>River</strong>: {pt.river}</li>
         </ul>
       </div>
 
       <div className="tutorial-section">
-        <h2>Ranking delle Mani</h2>
+        <h2>{pt.ranking}</h2>
         <ul>
-          <li><strong>1. Scala Reale (Royal Flush):</strong> A, K, Q, J, 10 dello stesso seme</li>
-          <li><strong>2. Scala Colore (Straight Flush):</strong> 5 carte consecutive stesso seme</li>
-          <li><strong>3. Poker (Four of a Kind):</strong> 4 carte dello stesso valore</li>
-          <li><strong>4. Full House:</strong> Tris + Coppia</li>
-          <li><strong>5. Colore (Flush):</strong> 5 carte stesso seme</li>
-          <li><strong>6. Scala (Straight):</strong> 5 carte consecutive</li>
-          <li><strong>7. Tris (Three of a Kind):</strong> 3 carte stesso valore</li>
-          <li><strong>8. Doppia Coppia (Two Pair):</strong> 2 coppie diverse</li>
-          <li><strong>9. Coppia (One Pair):</strong> 2 carte stesso valore</li>
-          <li><strong>10. Carta Alta:</strong> La mano più alta vince</li>
+          <li><strong>1. {pt.royalFlush}</strong></li>
+          <li><strong>2. {pt.straightFlush}</strong></li>
+          <li><strong>3. {pt.fourOfAKind}</strong></li>
+          <li><strong>4. {pt.fullHouse}</strong></li>
+          <li><strong>5. {pt.flush}</strong></li>
+          <li><strong>6. {pt.straight}</strong></li>
+          <li><strong>7. {pt.threeOfAKind}</strong></li>
+          <li><strong>8. {pt.twoPair}</strong></li>
+          <li><strong>9. {pt.onePair}</strong></li>
+          <li><strong>10. {pt.highCard}</strong></li>
         </ul>
       </div>
 
       <div className="tutorial-section">
-        <h2>Suggerimenti Pre-flop</h2>
+        <h2>{pt.preflopTips}</h2>
         <ul>
-          <li><strong>RAISE:</strong> AA, KK, QQ, AK suited, KQ suited</li>
-          <li><strong>CALL:</strong> Coppie medio-basse, suited connectors</li>
-          <li><strong>FOLD:</strong> Carte basse non collegate, mani con figuri spaiati</li>
+          <li><strong>{pt.raise}</strong>: AA, KK, QQ, AK suited, KQ suited</li>
+          <li><strong>{pt.call}</strong>: {lang === 'it' ? 'Coppie medio-basse, suited connectors' : 'Medium-low pairs, suited connectors'}</li>
+          <li><strong>{pt.fold}</strong>: {lang === 'it' ? 'Carte basse non collegate, mani con figuri spaiati' : 'Unconnected low cards, offsuit face cards'}</li>
         </ul>
       </div>
 
       <div className="tutorial-section">
-        <h2>Strategia Base</h2>
+        <h2>{pt.basicStrategy}</h2>
         <ul>
-          <li>Gioca tight: concentrati su mani forti</li>
-          <li>Posizione: più sei tardi, più informazioni hai</li>
-          <li>Osserva gli avversari: nota le loro abitudini</li>
-          <li>Bluffa con moderazione: solo quando ha senso</li>
-          <li>Gestisci il bankroll: non scommettere più di quanto puoi permetterti</li>
+          <li>{pt.playTight}</li>
+          <li>{pt.position}</li>
+          <li>{pt.observe}</li>
+          <li>{pt.bluff}</li>
+          <li>{pt.bankroll}</li>
         </ul>
       </div>
     </div>

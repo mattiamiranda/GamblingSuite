@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from '../Blackjack/Card';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Practice.css';
 
 function Practice() {
+  const { t } = useLanguage();
   const [playerCards, setPlayerCards] = useState([]);
   const [dealerCard, setDealerCard] = useState(null);
   const [selectedAction, setSelectedAction] = useState('');
@@ -55,28 +57,28 @@ function Practice() {
 
   return (
     <div className="game-container">
-      <h2 className="game-title">Blackjack - Modalità Pratica</h2>
+      <h2 className="game-title">{t('blackjack')} - {t('practice')}</h2>
 
       <div className="stats">
         <div className="stat">
           <div className="value">{stats.correct}</div>
-          <div className="label">Corrette</div>
+          <div className="label">{t('correctAnswers')}</div>
         </div>
         <div className="stat">
           <div className="value">{stats.total}</div>
-          <div className="label">Totali</div>
+          <div className="label">{t('totalAnswers')}</div>
         </div>
         <div className="stat">
           <div className="value">
             {stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0}%
           </div>
-          <div className="label">Accuratezza</div>
+          <div className="label">{t('accuracy')}</div>
         </div>
       </div>
 
       <div className="card-selector">
         <div className="card-group">
-          <h3>Le Tue Carte</h3>
+          <h3>{t('yourCards')}</h3>
           <div className="card-display">
             {playerCards.map((card, index) => (
               <Card key={index} rank={card.rank} suit={card.suit} />
@@ -85,7 +87,7 @@ function Practice() {
         </div>
 
         <div className="card-group">
-          <h3>Carta Dealer</h3>
+          <h3>{t('dealerCard')}</h3>
           <div className="card-display">
             {dealerCard && <Card rank={dealerCard.rank} suit={dealerCard.suit} />}
           </div>
@@ -107,20 +109,20 @@ function Practice() {
 
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <button onClick={validateAnswer} disabled={!selectedAction || feedback !== null}>
-          Verifica
+          {t('verify')}
         </button>
         <button onClick={newHand} style={{ marginLeft: '10px', background: '#0f3460' }}>
-          Nuova Mano
+          {t('newHand')}
         </button>
       </div>
 
       {feedback && (
         <div className={`feedback ${feedback.correct ? 'correct' : 'incorrect'}`}>
           <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>
-            {feedback.correct ? '✓ Corretto!' : '✗ Sbagliato!'}
+            {feedback.correct ? '✓ ' + t('correct') : '✗ ' + t('incorrect')}
           </div>
           <div>
-            Azione corretta: <strong>{feedback.correctAction}</strong>
+            {t('correctAction')}: <strong>{feedback.correctAction}</strong>
           </div>
           <div style={{ marginTop: '10px', fontStyle: 'italic' }}>
             {feedback.reason}

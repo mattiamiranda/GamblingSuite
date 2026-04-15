@@ -1,24 +1,25 @@
 # Gambling Suite
+
 <img width="1712" height="624" alt="GamblingSuite" src="https://github.com/user-attachments/assets/e84f3788-13db-4040-8792-05dd8a2a162f" />
 
-Applicazione web per imparare a giocare a Blackjack e Poker (Texas Hold'em).
+Web application to learn Blackjack and Poker (Texas Hold'em).
 
 ## Tech Stack
 
 - **Frontend**: React 18
 - **Backend**: Spring Boot 3.2 (Java 17)
-- **Comunicazione**: REST API con Axios
+- **Communication**: REST API with Axios
 
-## Struttura Progetto
+## Project Structure
 
 ```
 GamblingSuite/
-├── frontend/       # Applicazione React
-├── backend/       # Applicazione Spring Boot
+├── frontend/       # React application
+├── backend/        # Spring Boot application
 └── README.md
 ```
 
-## Prerequisiti
+## Prerequisites
 
 - Node.js 18+
 - Java 17+
@@ -33,7 +34,7 @@ cd backend
 ./mvnw spring-boot:run
 ```
 
-Il backend sarà disponibile su `http://localhost:8080`
+The backend will be available at `http://localhost:8080`
 
 ### Frontend
 
@@ -43,18 +44,18 @@ npm install
 npm start
 ```
 
-Il frontend sarà disponibile su `http://localhost:3000`
+The frontend will be available at `http://localhost:3000`
 
-## Funzionalità
+## Features
 
 ### Blackjack
-- Modalità pratica per imparare la strategia base
-- Feedback immediato sulle decisioni
-- Statistiche di accuratezza
+- Practice mode to learn basic strategy
+- Instant feedback on decisions
+- Accuracy statistics
 
 ### Poker (Texas Hold'em)
-- Analisi della mano corrente
-- Suggerimenti basati sulla strategia ottimale
+- Current hand analysis
+- Optimal strategy recommendations
 
 ## Build
 

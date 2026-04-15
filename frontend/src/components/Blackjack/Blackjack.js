@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Card from './Card';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Blackjack.css';
 
 const RANKS = ['TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE', 'TEN', 'JACK', 'QUEEN', 'KING', 'ACE'];
 const SUITS = ['HEARTS', 'DIAMONDS', 'CLUBS', 'SPADES'];
 
 function Blackjack() {
+  const { t } = useLanguage();
   const [playerCards, setPlayerCards] = useState([
     { rank: 'EIGHT', suit: 'HEARTS' },
     { rank: 'EIGHT', suit: 'SPADES' }
@@ -37,11 +39,11 @@ function Blackjack() {
 
   return (
     <div className="game-container">
-      <h2 className="game-title">Blackjack Advisor</h2>
+      <h2 className="game-title">{t('blackjack')} Advisor</h2>
 
       <div className="card-selector">
         <div className="card-group">
-          <h3>Le Tue Carte</h3>
+          <h3>{t('yourCards')}</h3>
           <div className="card-display">
             {playerCards.map((card, index) => (
               <Card key={index} rank={card.rank} suit={card.suit} />
@@ -68,7 +70,7 @@ function Blackjack() {
         </div>
 
         <div className="card-group">
-          <h3>Carta Dealer</h3>
+          <h3>{t('dealerCard')}</h3>
           <div className="card-display">
             <Card rank={dealerCard.rank} suit={dealerCard.suit} />
           </div>
@@ -91,7 +93,7 @@ function Blackjack() {
 
       <div style={{ textAlign: 'center' }}>
         <button onClick={getAdvice} disabled={loading}>
-          {loading ? 'Calcolo...' : 'Consigliami!'}
+          {loading ? t('calculating') : t('getAdvice')}
         </button>
       </div>
 

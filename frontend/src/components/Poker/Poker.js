@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from '../Blackjack/Card';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Poker.css';
 
 const RANKS = ['TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE', 'TEN', 'JACK', 'QUEEN', 'KING', 'ACE'];
 const SUITS = ['HEARTS', 'DIAMONDS', 'CLUBS', 'SPADES'];
 
 function Poker() {
+  const { t } = useLanguage();
   const [holeCards, setHoleCards] = useState([
     { rank: 'ACE', suit: 'SPADES' },
     { rank: 'KING', suit: 'HEARTS' }
@@ -62,7 +64,7 @@ function Poker() {
 
   return (
     <div className="game-container">
-      <h2 className="game-title">Texas Hold'em Advisor</h2>
+      <h2 className="game-title">{t('poker')} Advisor</h2>
 
       <div className="card-selector">
         <div className="card-group">
@@ -93,7 +95,7 @@ function Poker() {
         </div>
 
         <div className="card-group">
-          <h3>Carte Tavolo ({tableCards.length}/5)</h3>
+          <h3>{t('tableCards')} ({tableCards.length}/5)</h3>
           <div className="card-display">
             {tableCards.map((card, index) => (
               <Card key={index} rank={card.rank} suit={card.suit} />
@@ -107,12 +109,12 @@ function Poker() {
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '10px' }}>
             {tableCards.length < 5 && (
               <button onClick={addTableCard} style={{ padding: '8px 15px', margin: 0 }}>
-                + Carta
+                {t('addCard')}
               </button>
             )}
             {tableCards.length > 0 && (
               <button onClick={removeTableCard} style={{ padding: '8px 15px', margin: 0, background: '#666' }}>
-                - Carta
+                {t('removeCard')}
               </button>
             )}
           </div>
@@ -141,20 +143,20 @@ function Poker() {
 
       <div style={{ textAlign: 'center' }}>
         <button onClick={getAdvice} disabled={loading}>
-          {loading ? 'Calcolo...' : 'Consigliami!'}
+          {loading ? t('calculating') : t('getAdvice')}
         </button>
       </div>
 
       {advice && (
         <div className="advice-box">
           <div className="action">{advice.action}</div>
-          <div className="confidence">Confidence: {advice.confidence}</div>
+          <div className="confidence">{t('confidence')}: {advice.confidence}</div>
           <div className="reason">{advice.reason}</div>
         </div>
       )}
 
       <div className="tutorial-section" style={{ marginTop: '30px' }}>
-        <h3> ranking Mani di Poker</h3>
+        <h3>{t('pokerRanking')}</h3>
         <ul>
           {ranking.map((hand, index) => (
             <li key={index}>{hand}</li>

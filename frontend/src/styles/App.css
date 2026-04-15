@@ -23,6 +23,7 @@ body {
   border-radius: 10px;
   margin-bottom: 30px;
   text-align: center;
+  position: relative;
 }
 
 .app-header h1 {
