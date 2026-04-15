@@ -1,0 +1,10 @@
+.tutorial-content h3 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #ff6b6b;
+}
+
+.tutorial-content p {
+  line-height: 1.6;
+  color: #ccc;
+}

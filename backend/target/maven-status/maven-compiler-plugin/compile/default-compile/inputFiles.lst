@@ -1,0 +1,12 @@
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/controller/BlackjackController.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/GamblingSuiteApplication.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/dto/PokerAdviceResponse.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/service/PokerService.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/dto/PokerAdviceRequest.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/model/Suit.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/dto/BlackjackAdviceRequest.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/model/Card.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/controller/PokerController.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/model/Rank.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/dto/BlackjackAdviceResponse.java
+/home/tia/Documents/GamblingSuite/backend/src/main/java/com/gamblingsuite/service/BlackjackService.java

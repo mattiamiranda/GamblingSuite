@@ -1,0 +1,4 @@
+.selected {
+  background: #e94560 !important;
+  transform: scale(1.1);
+}
